@@ -87,6 +87,7 @@ string reduce(string number) {
 }
 
 int main() {
+
     // cout << "Reduce result: " << reduce("IIIIITTTTTI") <<endl;
     SignedInt number(0);
     cout << "Int number: " << number.conversion() << endl;  
