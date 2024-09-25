@@ -32,7 +32,7 @@ public:
              number.push_back(a);
          }
     }
-    int conversion() {
+    int conversion() const {//const потому что метод не изменяет объект
          int result = 0;
          for(int i = 0; i < number.size(); i++) {
              result += number.at(i) == 'I'? 1 : -1;
@@ -40,6 +40,12 @@ public:
          
          return result;
     }    
+    
+    SignedInt operator + (const SignedInt& other) {
+        int thisNumber = this->conversion();
+        int otherNumber = other.conversion();
+        return SignedInt(thisNumber + otherNumber);
+    }
 };
 
 string reduce(string number) {
@@ -88,6 +94,25 @@ string reduce(string number) {
 
 int main() {
     // cout << "Reduce result: " << reduce("IIIIITTTTTI") <<endl;
-    SignedInt number(0);
-    cout << "Int number: " << number.conversion() << endl;  
+    SignedInt number1(8);
+    //cout << "Int number: " << number.conversion() << endl; 
+    SignedInt number2(-17);
+    SignedInt result = number1 + number2;
+    cout << "ADD: " <<  result.conversion() << endl;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    return 0;
 }
