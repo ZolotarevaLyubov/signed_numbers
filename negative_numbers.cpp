@@ -96,7 +96,7 @@ int main() {
     // cout << "Reduce result: " << reduce("IIIIITTTTTI") <<endl;
     SignedInt number1(8);
     //cout << "Int number: " << number.conversion() << endl; 
-    SignedInt number2(-17);
+    SignedInt number2(-27);
     SignedInt result = number1 + number2;
     cout << "ADD: " <<  result.conversion() << endl;
     
