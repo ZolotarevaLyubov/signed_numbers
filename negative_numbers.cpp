@@ -21,17 +21,31 @@
 using namespace std;
 
 
+string reduce(string number);
+
 class SignedInt {
 private:
-    string number;
+
     
 public:
+    string number;
+
     SignedInt(int num) {
          char a = num > 0? 'I' : 'T';
          for(int i = 0; i < abs(num); i++) {
              number.push_back(a);
          }
     }
+    
+    SignedInt(string num) {
+         for(int i = 0; i < num.size(); i++) {
+              if(num.at(i) != 'I' && num.at(i) != 'T') {
+                   throw invalid_argument("I or T");
+              }
+         }
+         number = num;
+    }
+    
     int conversion() const {//const потому что метод не изменяет объект
          int result = 0;
          for(int i = 0; i < number.size(); i++) {
@@ -42,11 +56,28 @@ public:
     }    
     
     SignedInt operator + (const SignedInt& other) {
-        int thisNumber = this->conversion();
-        int otherNumber = other.conversion();
-        return SignedInt(thisNumber + otherNumber);
+        return SignedInt (reduce(this->number + other.number));
+    
     }
+    
+    SignedInt operator - (const SignedInt& other) {
+        string result = other.number;
+        
+        for(int i = 0; i < other.number.size(); i++) {
+            result.at(i) = other.number.at(i) == 'I'? 'T' : 'I';
+        }
+        return SignedInt (reduce(this->number + result));
+    }
+    
 };
+
+
+//[TTT] +  [TT] = [TTTTT] = -5
+//[TT] + [III] = [TTIII] = [TII] = [I] = 1
+//[IIII] - [II] = [IIII] + [TT] = [IIIITT] = [IIIT] = [II] = 2
+//[TTTT] - [TT] = [TTTT] + [II] = [TTTTII] = [TTTI] = [TT] = -2
+  //-4   - -2  = -2
+
 
 string reduce(string number) {
     bool changed;
@@ -94,12 +125,12 @@ string reduce(string number) {
 
 int main() {
     // cout << "Reduce result: " << reduce("IIIIITTTTTI") <<endl;
-    SignedInt number1(8);
+    SignedInt number1(-8);
     //cout << "Int number: " << number.conversion() << endl; 
-    SignedInt number2(-27);
-    SignedInt result = number1 + number2;
-    cout << "ADD: " <<  result.conversion() << endl;
-    
+    SignedInt number2(-2);
+    SignedInt result = number1 - number2;
+    cout << "RESULT:: " <<  result.conversion() << endl;
+    cout << result; // перегрузить <<    [IIITTTT]
     
     
     
