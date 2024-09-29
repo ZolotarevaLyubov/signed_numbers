@@ -69,6 +69,12 @@ public:
         return SignedInt (reduce(this->number + result));
     }
     
+    SignedInt operator * (const SignedInt& other) {
+        string result = string(abs(this->conversion()) * abs(other.conversion()), 'I');
+        
+        for()
+    }
+    
 };
 
 
@@ -130,7 +136,7 @@ int main() {
     SignedInt number2(-2);
     SignedInt result = number1 - number2;
     cout << "RESULT:: " <<  result.conversion() << endl;
-    cout << result; // перегрузить <<    [IIITTTT]
+    //cout << result; // перегрузить <<    [IIITTTT]
     
     
     
