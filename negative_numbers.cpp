@@ -72,7 +72,7 @@ public:
     SignedInt operator * (const SignedInt& other) {
         string result = string(abs(this->conversion()) * abs(other.conversion()), 'I');
         
-        
+        for()
     }
     
 };
