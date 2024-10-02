@@ -70,9 +70,27 @@ public:
     }
     
     SignedInt operator * (const SignedInt& other) {
-        string result = string(abs(this->conversion()) * abs(other.conversion()), 'I');
+        string result;
         
+        for(int i = 0; i < this->number.size(); i++) {
+             for(int j = 0; j < other.number.size(); j++) {
+                 char res;
+                 if(this->number.at(i) == 'I' && other.number.at(j) == 'I') {
+                     res = 'I';
+                 }
+                 else if(this->number.at(i) == 'T' && other.number.at(j) == 'T') {
+                     res = 'I';
+                 }
+                 else {
+                     res = 'T';
+                 }
+                 result.push_back(res);
+             }
+        }
         
+        result = reduce(result);
+        
+        return SignedInt(result);
     }
     
 };
@@ -134,8 +152,9 @@ int main() {
     SignedInt number1(-8);
     //cout << "Int number: " << number.conversion() << endl; 
     SignedInt number2(-2);
-    SignedInt result = number1 - number2;
+    SignedInt result = number1 * number2;
     cout << "RESULT:: " <<  result.conversion() << endl;
+    
     //cout << result; // перегрузить <<    [IIITTTT]
     
     
