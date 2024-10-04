@@ -25,10 +25,10 @@ string reduce(string number);
 
 class SignedInt {
 private:
-
+    string number;
     
 public:
-    string number;
+    
 
     SignedInt(int num) {
          char a = num > 0? 'I' : 'T';
@@ -55,6 +55,16 @@ public:
          return result;
     }    
     
+    int size() const{
+        
+        return number.size();
+    }
+    
+    char at(int i) const{
+        
+        return number.at(i);
+    }
+    
     SignedInt operator + (const SignedInt& other) {
         return SignedInt (reduce(this->number + other.number));
     
@@ -63,8 +73,8 @@ public:
     SignedInt operator - (const SignedInt& other) {
         string result = other.number;
         
-        for(int i = 0; i < other.number.size(); i++) {
-            result.at(i) = other.number.at(i) == 'I'? 'T' : 'I';
+        for(int i = 0; i < other.size(); i++) {
+            result.at(i) = other.at(i) == 'I'? 'T' : 'I';
         }
         return SignedInt (reduce(this->number + result));
     }
@@ -72,13 +82,13 @@ public:
     SignedInt operator * (const SignedInt& other) {
         string result;
         
-        for(int i = 0; i < this->number.size(); i++) {
-             for(int j = 0; j < other.number.size(); j++) {
+        for(int i = 0; i < number.size(); i++) {
+             for(int j = 0; j < other.size(); j++) {
                  char res;
-                 if(this->number.at(i) == 'I' && other.number.at(j) == 'I') {
+                 if(this->number.at(i) == 'I' && other.at(j) == 'I') {
                      res = 'I';
                  }
-                 else if(this->number.at(i) == 'T' && other.number.at(j) == 'T') {
+                 else if(this->number.at(i) == 'T' && other.at(j) == 'T') {
                      res = 'I';
                  }
                  else {
@@ -94,6 +104,27 @@ public:
     }
     
 };
+
+ostream& operator << (ostream& os, const SignedInt& num) {
+    os << '[';
+    for (int i = 0; i < num.size(); i++) {
+        os << num.at(i);
+    }
+    os << ']';
+    return os;    
+}
+
+// x*y = x+...x
+//          y раз
+
+
+// -1*1 = -1
+// 1*-1 = -1*1 = -1
+// -1*-1 =
+
+// []*[T] = [] to save consistency
+// [IT]*[T] = []
+// [IT]*[T] = [TI] = []
 
 
 //[TTT] +  [TT] = [TTTTT] = -5
@@ -140,7 +171,7 @@ string reduce(string number) {
         
         number = new_number;   
     
-        cout << "Number: " << number << endl; 
+        //cout << "Number: " << number << endl; 
         
     }while(changed);    
         
@@ -152,10 +183,14 @@ int main() {
     SignedInt number1(-8);
     //cout << "Int number: " << number.conversion() << endl; 
     SignedInt number2(-2);
+
+    //number2.number[0]='Q';
     SignedInt result = number1 * number2;
-    cout << "RESULT:: " <<  result.conversion() << endl;
+    //cout << "RESULT: " <<  result.conversion() << endl;
     
-    //cout << result; // перегрузить <<    [IIITTTT]
+
+    
+    cout << result; // перегрузить <<    [IIITTTT]
     
     
     
