@@ -29,7 +29,6 @@ private:
     
 public:
     
-
     SignedInt(int num) {
          char a = num > 0? 'I' : 'T';
          for(int i = 0; i < abs(num); i++) {
@@ -192,7 +191,6 @@ int main() {
 
     
     cout << result; // перегрузить <<    [IIITTTT]
-    
     
     
     
