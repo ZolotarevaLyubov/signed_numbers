@@ -38,6 +38,7 @@ public:
     }
     
     SignedInt(string num) {
+    
          for(int i = 0; i < num.size(); i++) {
               if(num.at(i) != 'I' && num.at(i) != 'T') {
                    throw invalid_argument("I or T");
