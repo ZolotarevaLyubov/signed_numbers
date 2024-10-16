@@ -1,6 +1,9 @@
 class SignedInt:
     def __init__(self, num):
-        self.number = 'I' * abs(num) if num > 0 else 'T' * abs(num)
+        if isinstance(num, str):
+            self.number = reduce(num)
+        else:    
+            self.number = 'I' * abs(num) if num > 0 else 'T' * abs(num)
         
     def conversion(self):
         result = sum(1 if ch == 'I' else -1 for ch in self.number)
@@ -38,5 +41,35 @@ def reduce(number):
         new_number = ''
         i = 0
         while i < len(number):
-            if i < len(number) - 1 and ((number[]))                      
+            if i < len(number) - 1 and ((number[i] == 'I' and number[i + 1] == 'T') or (number[i] == 'T' and number[i + 1] == 'I')):
+                i += 1
+                changed = True
+            else:
+                new_number += number[i]
+            i += 1
+        number = new_number
+    return number                                  
+
                 
+number1 = SignedInt(-8)
+number2 = SignedInt(-2)    
+
+addition_result = number1 + number2
+subtraction_result = number1 - number2
+multiplication_result = number1 * number2
+
+addition_output = addition_result.conversion()
+subtraction_output = subtraction_result.conversion()
+multiplication_output = multiplication_result.conversion()
+
+addition_output, subtraction_output, multiplication_output 
+
+print("number1 + number2 = ", addition_output)
+
+print("number1 - number2 = ", subtraction_output)
+
+print("number1 * number2 = ", multiplication_output)
+
+
+
+            
